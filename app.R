@@ -37,7 +37,7 @@ detach("package:xts", unload=TRUE)
 library(rsconnect)
 
 ######################################################################
-load("harriscovidpoi_Ding/poi.Rda")
+load("./poi.Rda")
 poi[c("sub_category")][is.na(poi[c("sub_category")])] <- "indoor"
 poi_v2 <- poi %>%
   mutate(type = if_else(sub_category ==  "All Other Amusement and Recreation Industries"| sub_category== "Promoters of Performing Arts, Sports, and Similar Events with Facilities"| sub_category== "Historical Sites"| sub_category== "Fitness and Recreational Sports Centers"| sub_category== "Museums"| sub_category== "Amusement Arcades"| sub_category== "Bowling Centers"| sub_category=="Casinos (except Casino Hotels)"| sub_category== "indoor", "indoor", "outdoor"))
@@ -53,10 +53,10 @@ por_barplot['year'] <- format(por_barplot$start_date, format="%Y")
 map_zip <- readOGR("COH_ZIPCODE.shp")
 zipcode <- unique(poi_v2$ZIP)
 #load data
-load("harriscovidpoi_Ding/covid.Rda")
-load("harriscovidpoi_Ding/poi19_co.Rda")
-load("harriscovidpoi_Ding/poi20_co.Rda")
-load("harriscovidpoi_Ding/poi21_co.Rda")
+load("./covid.Rda")
+load("./poi19_co.Rda")
+load("./poi20_co.Rda")
+load("./poi21_co.Rda")
 ################################################################
 #subset covid data
 confirmed <- covid[, -c(2,5,6,7)] %>% rename(cases = TotalConfirmedCases)
